@@ -5,13 +5,15 @@ It leverages the [limaVM project](https://github.com/lima-vm/lima).
 Can be used as an alternative to Docker Desktop. Check out my git repo of [docker-desktop-alternatives](https://github.com/csantanapr/docker-desktop-alternatives) for other tools.
 
 Currently in knative `kn quickstart` plugin version 1.2 you need to use 3 CPUs. colima creates the default vm with 2 CPUs.
+Knative having Pod resources request higher than 2CPUs, doesn't allow some Pods to run.
+
 See the knative quickstart issue [104](https://github.com/knative-sandbox/kn-plugin-quickstart/issues/104) for more details and latest status.
 
 ```
 colima delete
 colima start --cpu 3
 ```
-Knative having Pod resources request higher than 2CPUs, doesn't allow some Pods to run.
+For more options for the VM see `colima start --help`
 
 Lets set some defaults config values for the `knative` minikube vm to be created using the `docker` driver to leverage colima instead of hyperkit
 ```
@@ -35,12 +37,7 @@ kn quickstart minikube
 
 Follow the instruction when prompted to run `minikube tunnel -p knative`
 
-As workaround recreate the VM using 3 CPUs
-```
-colima delete
-colima start -c 3
-```
-For more options for the VM see `colima start --help`
+
 
 Lets create the knative minikube environment using the new colima VM with more CPUs
 ```
